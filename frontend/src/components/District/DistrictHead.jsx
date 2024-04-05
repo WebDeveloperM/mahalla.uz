@@ -1,11 +1,9 @@
-function RegionHead() {
+function DistrictHead() {
     return (
         <thead className={'text-center text-truncate align-middle'}>
         <tr>
             <th rowSpan="2">T/r</th>
-            <th rowSpan="2">Hudud</th>
-            <th rowSpan="2">tuman, <br/> shahar soni</th>
-            <th rowSpan="2">mahallalar <br/> soni</th>
+            <th rowSpan="2">Mahalla</th>
             <th rowSpan="2">honadonlar <br/> soni</th>
             <th colSpan="2">shulardan</th>
             <th rowSpan="2">oilalar soni</th>
@@ -23,9 +21,13 @@ function RegionHead() {
             <th>pensiya <br/> yoshida</th>
             <th>%</th>
         </tr>
+
+        <tr>
+            <td colSpan={13}>1-sektor</td>
+        </tr>
         </thead>
     )
 }
 
 
-export default RegionHead
+export default DistrictHead

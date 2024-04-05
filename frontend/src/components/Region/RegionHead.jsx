@@ -23,6 +23,9 @@ function RegionHead() {
             <th>pensiya <br/> yoshida</th>
             <th>%</th>
         </tr>
+        <tr>
+            <td colSpan={15}>1-sektor</td>
+        </tr>
         </thead>
     )
 }

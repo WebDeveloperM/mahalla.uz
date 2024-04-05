@@ -1,11 +1,9 @@
-function RegionBody() {
+function DistrictBody() {
     return (
         <tbody className={'text-center'}>
         <tr>
             <td>1</td>
-            <td>Andijon</td>
-            <td>25</td>
-            <td>450</td>
+            <td>Gulchorbog'</td>
             <td>1524</td>
             <td>263</td>
             <td>2638</td>
@@ -23,4 +21,4 @@ function RegionBody() {
 }
 
 
-export default RegionBody
+export default DistrictBody
