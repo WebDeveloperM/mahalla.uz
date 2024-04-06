@@ -1,9 +1,9 @@
 function DistrictHead() {
     return (
-        <thead className={'text-center text-truncate align-middle'}>
+        <thead className={'text-center text-truncate align-middle fs-6'}>
         <tr>
-            <th rowSpan="2">T/r</th>
-            <th rowSpan="2">Mahalla</th>
+            <th rowSpan="2">№</th>
+            <th rowSpan="2">Tuman</th>
             <th rowSpan="2">honadonlar <br/> soni</th>
             <th colSpan="2">shulardan</th>
             <th rowSpan="2">oilalar soni</th>

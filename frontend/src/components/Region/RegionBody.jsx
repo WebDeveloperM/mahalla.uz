@@ -1,9 +1,10 @@
-function RegionBody() {
+function RegionBody({regions}) {
     return (
         <tbody className={'text-center'}>
-            <tr>
+          {regions.map((region)=> (
+            <tr key={region.id}>
                 <td>1</td>
-                <td>Andijon</td>
+                <td>{region.name}</td>
                 <td>25</td>
                 <td>450</td>
                 <td>1524</td>
@@ -18,6 +19,7 @@ function RegionBody() {
                 <td>566</td>
                 <td>32</td>
             </tr>
+         ))}
         </tbody>
     )
 }

@@ -2,7 +2,7 @@ function RegionHead() {
     return (
         <thead className={'text-center text-truncate align-middle'}>
         <tr>
-            <th rowSpan="2">T/r</th>
+            <th rowSpan="2">№</th>
             <th rowSpan="2">Hudud</th>
             <th rowSpan="2">tuman, <br/> shahar soni</th>
             <th rowSpan="2">mahallalar <br/> soni</th>

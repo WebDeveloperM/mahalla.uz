@@ -1,11 +1,11 @@
 import './assets/css/bootstrap.css'
 import Navbar from './components/Navbar.jsx'
-import Home from "./components/Home.jsx";
+import Main from "./components/Main.jsx";
 function App() {
   return (
     <div className="App">
         <Navbar />
-        <Home/>
+        <Main/>
     </div>
   );
 }

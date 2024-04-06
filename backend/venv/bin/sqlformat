@@ -1,4 +1,4 @@
-#!/home/maruf/Desktop/mahalla.uz/backend/venv/bin/python3
+#!/home/maruf/Desktop/mahalla.uz/backend/venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys
