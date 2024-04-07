@@ -2,13 +2,15 @@ import DistrictHead from "./DistrictHead.jsx";
 import DistrictBody from "./DistrictBody.jsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {useParams} from "react-router-dom";
+import BASE_URL from '../../utils/urls'
 
 function DistrictTable() {
-    const [districts, setDistricts] = useState([])
-
+    const [districts, setDistricts] = useState(null)
+    const {id} = useParams()
     useEffect(
         () => {
-            axios.get('http://127.0.0.1:8000/api/v1/district/')
+            axios.get(`${BASE_URL}district/${id}/`)
                 .then(res => {
                     setDistricts(res.data)
                 })
@@ -19,14 +21,16 @@ function DistrictTable() {
     )
 
     return (
-        <>
-            <h2 className={'text-center fs-6 my-4'}>Buxoro viloyati bo`yicha mahalla balansi.</h2>
+        <section>
+            <h2 className={'text-center fs-6 my-4'}>{districts ? districts[0].region.name : ""} viloyati bo`yicha
+                mahalla
+                balansi.</h2>
 
             <table className="table table-bordered table-striped fs-6">
                 <DistrictHead/>
                 <DistrictBody districts={districts}/>
             </table>
-        </>
+        </section>
 
 
     )

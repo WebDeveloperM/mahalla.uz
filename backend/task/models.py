@@ -3,11 +3,13 @@ from django.db import models
 
 class BaseModel(models.Model):
     name = models.CharField(max_length=255)
+
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         abstract = True
+
 
 class Region(BaseModel):
     def __str__(self):
@@ -18,7 +20,7 @@ class District(BaseModel):
     region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='districts')
 
     def __str__(self):
-        return self.region
+        return self.name
 
 
 class Neighborhood(BaseModel):
@@ -35,10 +37,10 @@ class Street(BaseModel):
         return self.name
 
 
-class House(BaseModel):
+class House(models.Model):
     street = models.ForeignKey(Street, on_delete=models.CASCADE, related_name='houses')
-    ownership = models.CharField(max_length=255)
     number_of_appartment = models.IntegerField()
+    ownership = models.CharField(max_length=255)
     date_of_birth = models.DateField()
     category_appartment = models.CharField(max_length=255)
 

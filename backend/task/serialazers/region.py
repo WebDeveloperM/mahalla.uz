@@ -1,9 +1,6 @@
-from rest_framework.serializers import ModelSerializer
-
-from task.models import Region
+from rest_framework import serializers
 
 
-class RegionSerializer(ModelSerializer):
-    class Meta:
-        model = Region
-        fields = '__all__'
+class RegionSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
