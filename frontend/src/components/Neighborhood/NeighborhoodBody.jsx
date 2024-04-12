@@ -3,20 +3,20 @@ import {Link} from "react-router-dom";
 function NeighborhoodBody({neighborhoods}) {
     return (
         <tbody className={'text-center'}>
-        {neighborhoods?.map((neighborhood) => (
+        {neighborhoods?.map((neighborhood, index) => (
             <tr key={neighborhood.id}>
-                <td>1</td>
+                <td>{index+1}</td>
                 <td>
                     <Link to={`/street/${neighborhood.id}`}>
                         {neighborhood.name}
                     </Link>
                 </td>
 
-                <td>1524</td>
+                <td>{neighborhood.houses ? neighborhood.houses.length : ""}</td>
                 <td>263</td>
                 <td>2638</td>
                 <td>5422</td>
-                <td>85412</td>
+                <td>{neighborhood.persons ? neighborhood.persons.length : ""}</td>
                 <td>322</td>
                 <td>19%</td>
                 <td>865</td>

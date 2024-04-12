@@ -13,6 +13,7 @@ function DistrictTable() {
             axios.get(`${BASE_URL}district/${id}/`)
                 .then(res => {
                     setDistricts(res.data)
+                    console.log(res.data)
                 })
                 .catch(err => {
                     console.log(err)

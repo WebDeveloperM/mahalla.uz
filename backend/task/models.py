@@ -24,6 +24,7 @@ class District(BaseModel):
 
 
 class Neighborhood(BaseModel):
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='neighborhoods')
     district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='neighborhoods')
 
     def __str__(self):
@@ -31,6 +32,8 @@ class Neighborhood(BaseModel):
 
 
 class Street(BaseModel):
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='streets')
+    district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='streets')
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='streets')
 
     def __str__(self):
@@ -38,6 +41,9 @@ class Street(BaseModel):
 
 
 class House(models.Model):
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='houses')
+    district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='houses')
+    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='houses')
     street = models.ForeignKey(Street, on_delete=models.CASCADE, related_name='houses')
     number_of_appartment = models.IntegerField()
     ownership = models.CharField(max_length=255)
@@ -45,23 +51,27 @@ class House(models.Model):
     category_appartment = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.name
+        return f"{self.number_of_appartment}-uy"
 
 
 class Person(BaseModel):
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='persons')
+    district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='persons')
+    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='persons')
+    street = models.ForeignKey(Street, on_delete=models.CASCADE, related_name='persons')
     house = models.ForeignKey(House, on_delete=models.CASCADE, related_name='persons')
+    residential_status = models.CharField(max_length=255)
     passport_number = models.CharField(max_length=255)
     date_of_birth = models.DateField()
-    jshshir = models.BigIntegerField()
+    age = models.CharField(null=True, blank=True)
+    jshshir = models.CharField()
     phone_number = models.CharField(max_length=255)
-    appartment = models.IntegerField()
     appartment_type = models.CharField(max_length=255)
     cadastr_number = models.CharField(max_length=255)
     status_of_registration = models.CharField(max_length=255)
-    time_registered = models.DateTimeField()
+    time_registered = models.DateField()
     address_of_passport = models.CharField(max_length=255)
-    category_appartment = models.CharField(max_length=255)
-    image = models.ImageField()
+    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.name

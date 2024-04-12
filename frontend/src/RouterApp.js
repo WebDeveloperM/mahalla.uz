@@ -5,7 +5,7 @@ import DistrictTable from "./components/District/DistrictTable";
 import StreetTable from "./components/Street/StreetTable";
 import NeighborhoodTable from "./components/Neighborhood/NeighborhoodTable";
 import RegionTable from "./components/Region/RegionTable";
-import HomeTable from "./components/Home/HomeTable";
+import HouseTable from "./components/House/HouseTable";
 import PersonTable from "./components/Person/PersonTable";
 import NoPage from "./components/NoPage";
 
@@ -17,7 +17,7 @@ function RouterApp() {
             <Route path="/district/:id" element={<DistrictTable/>}/>
             <Route path="/neighborhood/:id" element={<NeighborhoodTable/>}/>
             <Route path="/street/:id" element={<StreetTable/>}/>
-            <Route path="/home/:id" element={<HomeTable/>}/>
+            <Route path="/house/:id" element={<HouseTable/>}/>
             <Route path="/person/:id" element={<PersonTable/>}/>
             <Route path="*" element={<NoPage/>}/>
         </Routes>

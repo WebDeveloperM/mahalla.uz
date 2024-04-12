@@ -2,7 +2,7 @@ import RegionTable from "./Region/RegionTable.jsx"
 import DistrictTable from "./District/DistrictTable";
 import StreetTable from "./Street/StreetTable";
 import PersonTable from "./Person/PersonTable";
-import HomeTable from "./Home/HomeTable";
+import HouseTable from "./House/HouseTable";
 import NeighborhoodTable from "./Neighborhood/NeighborhoodTable";
 import Navbar from "./Navbar";
 

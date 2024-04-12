@@ -18,4 +18,10 @@ class HouseSerializer(serializers.Serializer):
 
 
 class HouseSimpleSerializer(serializers.Serializer):
-    name = serializers.CharField()
+    ownership = serializers.CharField()
+    number_of_appartment = serializers.IntegerField()
+    street = serializers.CharField()
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['street'] = StreetSimpleSerializer(instance.street).data
+        return data
