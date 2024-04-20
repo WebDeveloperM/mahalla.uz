@@ -16,7 +16,7 @@ function Navbar() {
                             <Link className="nav-link active" aria-current="page" to={"/"}>Home</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="http://127.0.0.1:8000/mahalla_admin/" target="_blank">Admin</a>
+                            <a className="nav-link" href="https://mahalla-back-1.onrender.com/mahalla_admin/" target="_blank">Admin</a>
                         </li>
 
                     </ul>

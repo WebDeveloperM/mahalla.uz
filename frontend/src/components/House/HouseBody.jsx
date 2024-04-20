@@ -7,7 +7,7 @@ function HouseBody({houses}) {
             <tr key={house.id}>
                 <td>{index+1}</td>
                 <td>
-                    <Link to={`/person/${house.id}`}>
+                    <Link to={`/person/${house.id}/${house["number_of_appartment"]}`}>
                         {`${house['number_of_appartment']}-uy`}
                     </Link>
                 </td>

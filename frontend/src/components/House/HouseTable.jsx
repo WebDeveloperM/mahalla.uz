@@ -8,7 +8,7 @@ import BASE_URL from "../../utils/urls";
 function HouseTable() {
 
     const [houses, setHouses] = useState(null)
-    const {id} = useParams()
+    const {id, street} = useParams()
     useEffect(
         () => {
             axios.get(`${BASE_URL}house/${id}/`)
@@ -20,12 +20,9 @@ function HouseTable() {
                 })
         }, []
     )
-
     return (
         < >
-            <h2 className={'text-center fs-6 my-4'}>{houses && houses[0] ? houses[0].street.name : "Ushbu"} ko'cha
-                bo`yicha
-                mahalla balansi.</h2>
+            <h2 className={'text-center fs-6 my-4'}>{street} ko'cha bo`yicha mahalla balansi.</h2>
             <table className="table table-bordered table-striped fs-6">
                 <HouseHead/>
                 {

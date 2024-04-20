@@ -14,11 +14,10 @@ import AddIcon from '@mui/icons-material/Add';
 function PersonTable() {
 
     const [persons, setPersons] = useState(null)
-    const {id} = useParams()
+    const {id, house} = useParams()
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
 
     useEffect(
         () => {
@@ -31,16 +30,10 @@ function PersonTable() {
                 })
         }, []
     )
-    let number = 'Ushbu'
-    if (persons && persons[0]) {
-        number = `${persons[0]['house_id']['ownership']} honadoni `
 
-    }
-    console.log(persons)
     return (
-
         <>
-            <h2 className={'text-center fs-6 my-4'}> {persons !=null ? number : "Ushbu uy"}
+            <h2 className={'text-center fs-6 my-4'}> {house}-uy
                 fuqarolari to'grisida ma'lumot < /h2>
 
             <table className="table table-bordered table-striped fs-6">

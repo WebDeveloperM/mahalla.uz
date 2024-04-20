@@ -27,10 +27,9 @@ class PersonView(APIView):
 class AddPersonView(APIView):
 
     def post(self, request, *args, **kwargs):
-        print(request.data, "-------------------------------------------------")
         person = Person.objects.filter(passport_number=request.data.get('passport_number'))
         house = House.objects.get(id=request.data.get('house_id'))
-        print(house, "11111111111111111111111111")
+
         if person:
             return Response({"error": "Bunday foydalanuvchi mavjud!!!"}, status=status.HTTP_400_BAD_REQUEST)
         request.data['district_id'] = house.district_id
@@ -41,7 +40,7 @@ class AddPersonView(APIView):
         request.data['street_id'] = house.street_id
         age = datetime.date.today().year - int(request.data.get('date_of_birth')[:4])
         request.data['age'] = age
-        print(request.data, "0000000000000000000000000")
+
         serializer = PersonSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
@@ -53,9 +52,7 @@ class GetPersonView(APIView):
         id = kwargs.get('id')
         if not id:
             return Response({"error": "Id not found"}, status=status.HTTP_400_BAD_REQUEST)
-
         try:
-
             persons = Person.objects.filter(id=id)
         except:
             return Response({"error": "Failed to retrieve district"}, status=status.HTTP_404_NOT_FOUND)

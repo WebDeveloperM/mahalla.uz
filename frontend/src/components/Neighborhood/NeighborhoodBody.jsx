@@ -7,7 +7,7 @@ function NeighborhoodBody({neighborhoods}) {
             <tr key={neighborhood.id}>
                 <td>{index + 1}</td>
                 <td>
-                    <Link to={`/street/${neighborhood.id}`}>
+                    <Link to={`/street/${neighborhood.id}/${neighborhood.name}`}>
                         {neighborhood.name}
                     </Link>
                 </td>

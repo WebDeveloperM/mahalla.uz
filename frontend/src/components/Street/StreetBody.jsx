@@ -7,7 +7,7 @@ function StreetBody({streets}) {
             <tr key={street.id}>
                 <td>{index + 1}</td>
                 <td>
-                    <Link to={`/house/${street.id}`}>{street.name}</Link>
+                    <Link to={`/house/${street.id}/${street.name}`}>{street.name}</Link>
                 </td>
                 <td>{street.count_houses}</td>
                 <td>{street.count_residention}</td>

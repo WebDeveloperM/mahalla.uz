@@ -7,7 +7,7 @@ function DistrictBody({districts}) {
         <tr key={district.id}>
             <td>{index + 1}</td>
             <td>
-                <Link to={`/neighborhood/${district.id}`}>{district.name}</Link>
+                <Link to={`/neighborhood/${district.id}/${district.name}`}>{district.name}</Link>
             </td>
             <td>{district.count_houses}</td>
             <td>{district.count_residention}</td>

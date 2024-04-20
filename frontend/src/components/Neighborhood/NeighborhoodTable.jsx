@@ -8,7 +8,7 @@ import axios from "axios";
 function NeighborhoodTable() {
 
     const [neighborhoods, setNeighborhood] = useState(null)
-    const {id} = useParams()
+    const {id, district} = useParams()
     useEffect(
         () => {
             axios.get(`${BASE_URL}neighborhood/${id}/`)
@@ -20,13 +20,10 @@ function NeighborhoodTable() {
                 })
         }, []
     )
-    let name = "Ushbu"
-    if (neighborhoods && neighborhoods[0]) {
-            name = neighborhoods[0].name
-    }
+
     return (
         <>
-            <h2 className={'text-center fs-6 my-4'}>{neighborhoods != null ? name : ""} tuman
+            <h2 className={'text-center fs-6 my-4'}>{district} tuman
                 bo`yicha
                 mahalla balansi.</h2>
 

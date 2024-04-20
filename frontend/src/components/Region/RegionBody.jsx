@@ -7,7 +7,7 @@ function RegionBody({regions}) {
             <tr key={region.id}>
                 <td>{index + 1}</td>
                 <td>
-                    <Link to={`/district/${region.id}`}>{region.name}</Link>
+                    <Link to={`/district/${region.id}/${region.name}`}>{region.name}</Link>
                 </td>
                 <td>{region.count_districts}</td>
                 <td>{region.count_neighbourhoods}</td>

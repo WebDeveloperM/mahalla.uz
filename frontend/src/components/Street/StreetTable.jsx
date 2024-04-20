@@ -7,7 +7,7 @@ import BASE_URL from "../../utils/urls";
 
 function StreetTable() {
     const [streets, setStreet] = useState(null)
-    const {id} = useParams()
+    const {id, neighborhood} = useParams()
     useEffect(
         () => {
             axios.get(`${BASE_URL}street/${id}/`)
@@ -20,15 +20,9 @@ function StreetTable() {
         }, []
     )
 
-    let name = "Ushbu"
-    if (streets && streets[0]) {
-        name = streets[0].name
-    }
     return (
-
-
         <>
-            <h2 className={'text-center fs-6 my-4'}>{streets ? name : ""} mahalasi bo`yicha mahalla balansi.</h2>
+            <h2 className={'text-center fs-6 my-4'}>{neighborhood} mahalasi bo`yicha mahalla balansi.</h2>
 
             <table className="table table-bordered table-striped fs-6">
                 <StreetHead/>

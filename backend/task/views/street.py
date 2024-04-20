@@ -3,7 +3,6 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from task.models import Street
-from task.serialazers.street import StreetSerializer
 
 
 class StreetView(APIView):

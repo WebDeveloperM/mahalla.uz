@@ -15,11 +15,11 @@ function RouterApp() {
      <Routes>
             <Route path="/" element={<Main/>}/>
             <Route path="/region" element={<RegionTable/>}/>
-            <Route path="/district/:id" element={<DistrictTable/>}/>
-            <Route path="/neighborhood/:id" element={<NeighborhoodTable/>}/>
-            <Route path="/street/:id" element={<StreetTable/>}/>
-            <Route path="/house/:id" element={<HouseTable/>}/>
-            <Route path="/person/:id" element={<PersonTable/>}/>
+            <Route path="/district/:id/:region" element={<DistrictTable/>}/>
+            <Route path="/neighborhood/:id/:district" element={<NeighborhoodTable/>}/>
+            <Route path="/street/:id/:neighborhood" element={<StreetTable/>}/>
+            <Route path="/house/:id/:street" element={<HouseTable/>}/>
+            <Route path="/person/:id/:house" element={<PersonTable/>}/>
             <Route path="/getperson/:id" element={<GetPersonModalka/>}/>
             <Route path="/admin" action={""}/>
             <Route path="*" element={<NoPage/>}/>

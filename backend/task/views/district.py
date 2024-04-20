@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from task.models import District
+from task.models import District, Region
 
 
 class DistrictView(APIView):
@@ -15,7 +15,7 @@ class DistrictView(APIView):
 
         try:
             districts = District.objects.filter(region_id=id)
-
+            region = Region.objects.filter(id=id).last()
             districts = (districts.prefetch_related('neighborhoods', 'neighborhoods__streets')
             .annotate(
                 count_neighborhoods=Count('neighborhoods', distinct=True),
@@ -29,8 +29,9 @@ class DistrictView(APIView):
                 count_pensioner=Count('persons', distinct=True, filter=Q(persons__age__gte='60'))
 
             ))
-            # district = District.objects.raw('SELECT * FROM task_district WHERE id = %s', [id,])
+
         except:
             return Response({"error": "Failed to retrieve district"}, status=status.HTTP_404_NOT_FOUND)
-        # serializer = DistrictSerializer(districts, many=True)
+        districts['region'] = region.name
+
         return Response(districts.values(), status=status.HTTP_200_OK)

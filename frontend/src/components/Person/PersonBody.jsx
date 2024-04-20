@@ -1,20 +1,7 @@
-import {Link, useParams} from "react-router-dom";
-import Modal from "@mui/material/Modal";
+import {Link} from "react-router-dom";
 import * as React from "react";
-import {useEffect, useState} from "react";
-import GetPersonModalka from "../GetPersonModalka";
-import axios from "axios";
-import BASE_URL from "../../utils/urls";
 
 function PersonBody({persons}) {
-
-
-    const id = useParams()
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
-
 
     return (
         <>
@@ -23,7 +10,7 @@ function PersonBody({persons}) {
                 <tr key={person.id}>
                     <td>{index + 1}</td>
                     <td>
-                        <Link  to={`/getperson/${person.id}`}>
+                        <Link to={`/getperson/${person.id}`}>
                             {person.name}
                         </Link>
                     </td>
@@ -34,8 +21,6 @@ function PersonBody({persons}) {
                 </tr>
             ))}
             </tbody>
-
-
         </>
     )
 }
