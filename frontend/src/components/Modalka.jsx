@@ -26,14 +26,22 @@ function Modalka({persons, houseId}) {
     const [appartmentType, setAppartmentType] = useState("")
     const [timeRegister, setTimeRegister] = useState("")
     const [addressOfPasport, setAddressOfPasport] = useState("")
-    const [file, setFile] = useState();
 
+
+    const [file, setFile] = useState('');
+    const [image, setImage] = useState('');
+
+
+    const [gender, setGender] = useState("");
+    console.log(file, "0000000000000000000000000000")
     const navigate = useNavigate();
 
+    // let URL = 'http://localhost:3000/'
 
-    function handleChange(e) {
-        console.log(e.target.files);
-        setFile(URL.createObjectURL(e.target.files[0]));
+
+    function handleChange(event) {
+        setFile(event.target.files[0])
+        setImage(URL.createObjectURL(event.target.files[0]));
     }
 
 
@@ -70,38 +78,43 @@ function Modalka({persons, houseId}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        const formData = new FormData()
+        formData.append("house_id", houseId)
+        formData.append("gender", gender)
+        formData.append("name", fullname)
+        formData.append("residential_status", residentialStatus)
+        formData.append("passport_number", pasport)
+        formData.append("date_of_birth", dateOfBirth)
+        formData.append("jshshir", jshshir)
+        formData.append("phone_number", phone)
+        formData.append("appartment_type", appartmentType)
+        formData.append("cadastr_number", cadastrNumeber)
+        formData.append("status_of_registration", statusOfRegister)
+        formData.append("time_registered", timeRegister)
+        formData.append("address_of_passport", addressOfPasport)
+        formData.append('image', file)
+
+        const config = {
+            headers: {'content-type': 'multipart/form-data'}
+        }
+        console.log(formData, "44444444444444444444444444444")
+
         const result = window.confirm("Barcha ma'lumotlarni tasdiqlaysizmi?")
+
         if (file == null) {
             alert("Rasm tanlash majburiy!!!")
             return
         }
         if (result) {
-            const userData = {
-                house_id: houseId,
-                name: fullname,
-                residential_status: residentialStatus,
-                passport_number: pasport,
-                date_of_birth: dateOfBirth,
-                jshshir: jshshir,
-                phone_number: phone,
-                appartment_type: appartmentType,
-                cadastr_number: cadastrNumeber,
-                status_of_registration: statusOfRegister,
-                time_registered: timeRegister,
-                address_of_passport: addressOfPasport,
-                image: file,
 
-
-            };
-
-            axios.post(`${BASE_URL}add-person/`, userData)
+            axios.post(`${BASE_URL}add-person/`, formData, config)
                 .then((response) => {
+                    console.log(response.data, "55555555555555555555555")
                     alert("Ma'lumotlaringiz qabul qilindi")
                     navigate('/')
                 }).catch((error) => {
                     console.log(error)
                     if (error.response.data.error !== null) {
-
                         alert(error.response.data.error)
                     } else {
                         alert("Xatolik bor !!!")
@@ -123,7 +136,6 @@ function Modalka({persons, houseId}) {
         number = persons[0]['house_id']['number_of_appartment']
         console.log(number)
     }
-    console.log(persons, "=======================================")
     return (
         <form onSubmit={handleSubmit} className={"container card mt-3 py-3"}>
             <div className="row px-2">
@@ -141,10 +153,9 @@ function Modalka({persons, houseId}) {
                             <div className="col-3">Mulkiy mansubligi:</div>
                             <div className="col d-flex justify-content-end">
                                 <select required className="form-select  form-select-sm w-50"
-                                        onChange={e => {
-                                            console.log()
+                                        onChange={e =>
                                             setResidentialStatus(e.target.value)
-                                        }}
+                                        }
                                 >
                                     <option>Tanlang</option>
                                     <option value="shaxsiy">shaxsiy</option>
@@ -212,9 +223,11 @@ function Modalka({persons, houseId}) {
                                 <p>Ko'cha:</p>
                             </div>
                             <div className="col text-center d-flex justify-content-end">
-                                <input defaultValue={persons != null ? persons[0]['house_id'].street.name : ""} required type="text" onChange={e => setStreet(e.target.value)}
-                                       className="form-control form-control-sm w-75"
-                                       />
+                                <input
+                                    defaultValue={persons != null && persons[0] ? persons[0]['house_id'].street.name : ""}
+                                    required type="text" onChange={e => setStreet(e.target.value)}
+                                    className="form-control form-control-sm w-75"
+                                />
                             </div>
                             <div className="col-2">Xonadon:</div>
                             <div className="col d-flex justify-content-end">
@@ -254,7 +267,6 @@ function Modalka({persons, houseId}) {
 
                                 <select className="form-select  form-select-sm w-75" onChange={e => {
                                     setAppartmentType(e.target.value)
-                                    console.log(e.target.value, "9999999999999999999999")
                                 }}
                                 >
                                     <option>Tanlang</option>
@@ -269,12 +281,26 @@ function Modalka({persons, houseId}) {
                             </div>
                         </div>
                         <div className="row px-3 mb-3 ">
-                            <div className="col-4">
+                            <div className="col-2">
                                 <p>Pasport bo'yicha manzilingiz:</p>
                             </div>
-                            <div className="col text-center d-flex justify-content-end">
+                            <div className="col-5 text-center d-flex justify-content-end">
                                 <input required onChange={e => setAddressOfPasport(e.target.value)} type="text"
                                        className="form-control form-control-sm w-100"/>
+                            </div>
+                            <div className="col-2">
+                                <p>Jinsi:</p>
+                            </div>
+                            <div className="col-3 text-center d-flex justify-content-end">
+                                <select className="form-select  form-select-sm w-75" onChange={e => {
+                                    setGender(e.target.value)
+
+                                }}
+                                >
+                                    <option>Tanlang</option>
+                                    <option value={"Erkak"}>Erkak</option>
+                                    <option value={"Ayol"}>Ayol</option>
+                                </select>
                             </div>
 
                         </div>
@@ -289,12 +315,16 @@ function Modalka({persons, houseId}) {
                 <div className="col-2">
                     <div className="card bg-light px-3 py-3" style={{width: "100%"}}>
 
-                        {file ?
-                            <img src={file} width={'100%'}/> :
+                        {image ?
+
+                            <img src={image} width={'100%'}/>
+                            :
+
                             <img src={avatar} alt="" width={'100%'}/>
                         }
                     </div>
                     <div className="card mt-2">
+                        {/*<input type="file" onChange={e=>setFile(e.target.files[0])}/>*/}
                         <Button
                             size="small"
                             component="label"

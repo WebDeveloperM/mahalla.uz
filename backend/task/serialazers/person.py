@@ -17,12 +17,13 @@ class PersonSerializer(serializers.Serializer):
     status_of_registration = serializers.CharField(max_length=255)
     time_registered = serializers.DateField()
     address_of_passport = serializers.CharField(max_length=255)
-    image = serializers.CharField()
+    image = serializers.FileField()
     district_id = serializers.IntegerField()
     region_id = serializers.IntegerField()
     neighborhood_id = serializers.IntegerField()
     street_id = serializers.IntegerField()
     age = serializers.IntegerField()
+    gender = serializers.CharField()
 
     def to_representation(self, instance):
         data = super().to_representation(instance)

@@ -9,19 +9,19 @@ function RegionBody({regions}) {
                 <td>
                     <Link to={`/district/${region.id}`}>{region.name}</Link>
                 </td>
-                <td>{region.districts ? region.districts.length : ""}</td>
-                <td>{region.neighborhoods ? region.neighborhoods.length : ""}</td>
-                <td>{region.houses ? region.houses.length : ""}</td>
-                <td>263</td>
-                <td>2638</td>
-                <td>{region.houses ? region.houses.length : ""}</td>
-                <td>{region.persons ? region.persons.length : ""}</td>
-                <td>322</td>
-                <td>19%</td>
-                <td>865</td>
-                <td>43</td>
-                <td>566</td>
-                <td>32</td>
+                <td>{region.count_districts}</td>
+                <td>{region.count_neighbourhoods}</td>
+                <td>{region.count_houses}</td>
+                <td>{region.count_residention}</td>
+                <td>{region.count_people - region.count_residention}</td>
+                <td>{region.count_houses}</td>
+                <td>{region.count_people}</td>
+                <td>{region.count_young_people}</td>
+                <td>{region.count_young_people != 0 ? (region.count_young_people / region.count_people * 100).toFixed(0) : 0}</td>
+                <td>{region.count_femail}</td>
+                <td>{region.count_femail != 0 ? (region.count_femail / region.count_people * 100).toFixed(0) : 0}</td>
+                <td>{region.count_pensioner}</td>
+                <td>{region.count_pensioner != 0 ? (region.count_pensioner / region.count_people * 100).toFixed(0) : 0}</td>
             </tr>
         ))}
         </tbody>

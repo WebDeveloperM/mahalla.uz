@@ -19,11 +19,16 @@ function StreetTable() {
                 })
         }, []
     )
+
+    let name = "Ushbu"
+    if (streets && streets[0]) {
+        name = streets[0].name
+    }
     return (
 
 
         <>
-            <h2 className={'text-center fs-6 my-4'}>{streets ? streets[0].neighborhood.name : ""} mahalasi bo`yicha mahalla balansi.</h2>
+            <h2 className={'text-center fs-6 my-4'}>{streets ? name : ""} mahalasi bo`yicha mahalla balansi.</h2>
 
             <table className="table table-bordered table-striped fs-6">
                 <StreetHead/>

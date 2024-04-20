@@ -15,7 +15,6 @@ function PersonTable() {
 
     const [persons, setPersons] = useState(null)
     const {id} = useParams()
-    console.log(persons, "------------------------------------------------------")
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -32,24 +31,27 @@ function PersonTable() {
                 })
         }, []
     )
-    let number = 0
-    if (persons && persons[0] ) {
-        number = persons[0]['house_id']['number_of_appartment']
-        console.log(number)
+    let number = 'Ushbu'
+    if (persons && persons[0]) {
+        number = `${persons[0]['house_id']['ownership']} honadoni `
+
     }
+    console.log(persons)
     return (
 
         <>
-            <h2 className={'text-center fs-6 my-4'}> {persons == null ? number : "Ushbu"} uy
-                fuqarolari to`grisida ma'lumot < /h2>
+            <h2 className={'text-center fs-6 my-4'}> {persons !=null ? number : "Ushbu uy"}
+                fuqarolari to'grisida ma'lumot < /h2>
 
-            {
-                persons ? <table className="table table-bordered table-striped fs-6">
-                        <PersonHead/>
+            <table className="table table-bordered table-striped fs-6">
+                <PersonHead/>
+                {
+                    persons ?
                         <PersonBody persons={persons}/>
-                    </table> :
-                    ""
-            }
+                        :
+                        ""
+                }
+            </table>
 
             <div>
                 <Button

@@ -20,16 +20,26 @@ function DistrictTable() {
                 })
         }, []
     )
+    let name = "Ushbu"
+    if (districts &&  districts[0]) {
+            name = districts[0].name
+    }
 
     return (
         <section>
-            <h2 className={'text-center fs-6 my-4'}>{districts ? districts[0].region.name : ""} viloyati bo`yicha
+            <h2 className={'text-center fs-6 my-4'}>{districts != null ? name : ""} viloyati
+                bo`yicha
                 mahalla
                 balansi.</h2>
 
+
             <table className="table table-bordered table-striped fs-6">
                 <DistrictHead/>
-                <DistrictBody districts={districts}/>
+                {districts ?
+                    <DistrictBody districts={districts}/>
+                    : ""
+                }
+
             </table>
         </section>
 

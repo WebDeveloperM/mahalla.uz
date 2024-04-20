@@ -20,17 +20,26 @@ function NeighborhoodTable() {
                 })
         }, []
     )
-
-
+    let name = "Ushbu"
+    if (neighborhoods && neighborhoods[0]) {
+            name = neighborhoods[0].name
+    }
     return (
         <>
-            <h2 className={'text-center fs-6 my-4'}>{neighborhoods ? neighborhoods[0].district.name : ""} tuman bo`yicha
+            <h2 className={'text-center fs-6 my-4'}>{neighborhoods != null ? name : ""} tuman
+                bo`yicha
                 mahalla balansi.</h2>
 
             <table className="table table-bordered table-striped fs-6">
                 <NeighborhoodHead/>
-                <NeighborhoodBody neighborhoods={neighborhoods}/>
+                {
+                    neighborhoods ?
+                        <NeighborhoodBody neighborhoods={neighborhoods}/>
+                        :
+                        ""
+                }
             </table>
+
         </>
 
 

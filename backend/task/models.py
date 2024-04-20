@@ -54,6 +54,10 @@ class House(models.Model):
         return f"{self.number_of_appartment}-uy"
 
 
+def upload_to(instance, filename):
+    return 'images/{filename}'.format(filename=filename)
+
+
 class Person(BaseModel):
     region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='persons')
     district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='persons')
@@ -71,7 +75,8 @@ class Person(BaseModel):
     status_of_registration = models.CharField(max_length=255)
     time_registered = models.DateField()
     address_of_passport = models.CharField(max_length=255)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to=upload_to)
+    gender = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name

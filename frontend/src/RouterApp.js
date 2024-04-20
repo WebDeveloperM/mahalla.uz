@@ -8,6 +8,7 @@ import RegionTable from "./components/Region/RegionTable";
 import HouseTable from "./components/House/HouseTable";
 import PersonTable from "./components/Person/PersonTable";
 import NoPage from "./components/NoPage";
+import GetPersonModalka from "./components/GetPersonModalka.jsx";
 
 function RouterApp() {
     return (<section className={"container"}>
@@ -19,6 +20,8 @@ function RouterApp() {
             <Route path="/street/:id" element={<StreetTable/>}/>
             <Route path="/house/:id" element={<HouseTable/>}/>
             <Route path="/person/:id" element={<PersonTable/>}/>
+            <Route path="/getperson/:id" element={<GetPersonModalka/>}/>
+            <Route path="/admin" action={""}/>
             <Route path="*" element={<NoPage/>}/>
         </Routes>
     </section>
