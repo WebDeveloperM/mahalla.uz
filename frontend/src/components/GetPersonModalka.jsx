@@ -11,12 +11,9 @@ import BASE_URL from "../utils/urls";
 import {useNavigate, useParams} from "react-router-dom";
 import {InputMask} from 'primereact/inputmask';
 
-
 function Modalka() {
     const [person, setPerson] = useState(null)
     const {id} = useParams()
-    console.log(person, "-----------------------------")
-
     const [pasport, setPasport] = useState("")
     const [dateOfBirth, setDateOfBirth] = useState("")
     const [residentialStatus, setResidentialStatus] = useState("")
@@ -352,7 +349,7 @@ function Modalka() {
                     <div className="card bg-light px-3 py-3" style={{width: "100%"}}>
 
                         {person ?
-                            <img src={`http://127.0.0.1:8000${person[0]['image']}`} width={'100%'} aria-disabled/>
+                            <img src={`https://mahalla-back-1.onrender.com${person[0]['image']}`} width={'100%'} aria-disabled/>
                             :
                             <img src={avatar} alt="" width={'100%'}/>
                         }
@@ -368,7 +365,7 @@ function Modalka() {
                             sx={{textTransform: 'lowercase'}}
                         >
                             Upload image
-                            <VisuallyHiddenInput type="file" onChange={handleChange}/>
+                            <VisuallyHiddenInput disabled type="file" onChange={handleChange}/>
                         </Button>
 
 

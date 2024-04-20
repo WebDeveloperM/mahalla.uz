@@ -17,16 +17,13 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r+@l%es0c1%@iz4l-i88bxf6cj7!15$9qa4e&a_nb##0k*$u7k'
-
+# SECRET_KEY = 'django-insecure-r+@l%es0c1%@iz4l-i88bxf6cj7!15$9qa4e&a_nb##0k*$u7k'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = os.environ.get('DEBUG', "False").lower() == 'true'
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(" ")
 
-ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
@@ -50,6 +47,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -65,10 +63,6 @@ CORS_ORIGIN_WHITELIST = (
     'http://127.0.0.1:8000',
 )
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:3000',
-#     'http://127.0.0.1:8000',
-# ]
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
@@ -109,10 +103,11 @@ DATABASES = {
         "NAME": BASE_DIR / 'db.sqlite3',
     }
 }
+#
+database_url = os.environ.get('DATABASE_URL')
 
-DATABASES['default'] = dj_database_url.parse(
-    'postgres://mahalla_database_user:kMkHRtn0wjwmKwVFDvQan1XOzGPEdWV6@dpg-coho8sgl5elc73cra4n0-a.oregon-postgres.render.com/mahalla_database')
-
+DATABASES['default'] = dj_database_url.parse(database_url)
+# DATABASES['default'] = dj_database_url.parse('postgres://mahalla_database_user:kMkHRtn0wjwmKwVFDvQan1XOzGPEdWV6@dpg-coho8sgl5elc73cra4n0-a.oregon-postgres.render.com/mahalla_database')
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -145,8 +140,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # STATIC_ROOT = os.path.join(BASE_DIR, 'files/assets')
+#
+if not DEBUG:
+    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -156,8 +158,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-try:
-    from .settings_dev import *
-except ImportError:
-    pass
